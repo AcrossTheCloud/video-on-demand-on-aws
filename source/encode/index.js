@@ -139,7 +139,7 @@ exports.handler = async (event) => {
         }
       },
       "Outputs": [{
-        "NameModifier": "_tumb",
+        "NameModifier": "_thumb",
         "ContainerSettings": {
           "Container": "RAW"
         },
