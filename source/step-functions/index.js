@@ -33,7 +33,7 @@ exports.handler = async (event) => {
 
 			case event.hasOwnProperty('Records'):
 				//Ingest workflow triggered by s3 event::
-				event.guid = uuid.v4();
+
 				//Identify file extention of s3 object::
 				let key = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
 				if (key.slice((key.lastIndexOf(".") - 1 >>> 0) + 2) === 'json') {
@@ -41,10 +41,11 @@ exports.handler = async (event) => {
 				} else {
 					event.workflowTrigger = 'Video';
 				}
+				event.guid=key.split('/').slice(0,2).join('/');
 				params = {
 					stateMachineArn: process.env.IngestWorkflow,
 					input: JSON.stringify(event),
-					name: event.guid
+					name: uuid.v4()
 				};
 				break;
 
@@ -73,14 +74,14 @@ exports.handler = async (event) => {
 					input: JSON.stringify({
 						guid: event.guid
 					}),
-					name: event.guid
+					name: uuid.v4()
 				};
 				response = 'success';
 				break;
 
 
 			case event.hasOwnProperty('detail'):
-				//Publish workflow triggered by MediaConver CloudWatch event::
+				//Publish workflow triggered by MediaConvert CloudWatch event::
 				params = {
 					stateMachineArn: process.env.PublishWorkflow,
 					input: JSON.stringify(event),
