@@ -155,7 +155,7 @@ exports.handler = async (event) => {
           "AntiAlias": "ENABLED",
           "CodecSettings": {
             "FrameCaptureSettings": {
-              "MaxCaptures": 10000000,
+              "MaxCaptures": 100,
               "Quality": 80,
               "FramerateDenominator": 5,
               "FramerateNumerator": 1
