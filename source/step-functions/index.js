@@ -41,7 +41,7 @@ exports.handler = async (event) => {
 				} else {
 					event.workflowTrigger = 'Video';
 				}
-				event.guid=key.split('/').slice(0,2).join('/');
+				event.guid=key.split('/').slice(0,3).join('/');
 				params = {
 					stateMachineArn: process.env.IngestWorkflow,
 					input: JSON.stringify(event),
