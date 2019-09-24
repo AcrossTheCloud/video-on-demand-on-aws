@@ -34,7 +34,7 @@ exports.handler = async (event) => {
       "JobTemplate": event.jobTemplate,
       "Role": process.env.MediaConvertRole,
       "UserMetadata": {
-        "guid": event.guid,
+        "time": Date.now().toString(),
         "workflow": event.workflowName,
         "Qvbr": process.env.Qvbr
       },
